@@ -11,6 +11,18 @@
 npm install yamlize
 ```
 
+For CI/CD and easier usage, use [our CLI](https://github.com/cosmology-tech/yamlize/tree/main/packages/cli):
+
+```sh
+npm install @yamlize/cli
+```
+
+or for your own use:
+
+```sh
+npm install -g @yamlize/cli
+```
+
 ## Table of contents
 
 - [yamlize](#yamlize)

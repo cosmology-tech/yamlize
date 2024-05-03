@@ -10,7 +10,7 @@ Options:
 
 --help, -h                 Show this help message.
 --version, -v              Show the version number.
---config                   Path to the config file (optional). If not provided, defaults to 'false'.
+--config                   Path to the config file (optional).
 --inFile                   Path to the meta yaml file where the configuration is defined.
 --outFile                  Path where the generated yaml file will be saved.
 `)
