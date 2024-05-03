@@ -3,13 +3,19 @@ import yaml from 'js-yaml';
 import objectPath from 'nested-obj';
 import { dirname, join } from "path";
 
-const templateRegex = /\${{\s*([^.\s]+)\.([^}\s]+)\s*}}/g;
-
 function replaceTemplates(str: string, context: any) {
-  let currentStr = str;
-
+  const templateRegex = /\${{\s*([^.\s]+)\.([^}\s]+)\s*}}/g;
+  let matches = [];
   let match;
-  while ((match = templateRegex.exec(currentStr)) !== null) {
+
+  // Collect all matches first
+  while ((match = templateRegex.exec(str)) !== null) {
+    matches.push(match);
+  }
+
+  // Replace from end to start to avoid messing with indices
+  for (let i = matches.length - 1; i >= 0; i--) {
+    match = matches[i];
     const fullMatch = match[0];
     const type = match[1];
     const key = match[2];
@@ -20,12 +26,14 @@ function replaceTemplates(str: string, context: any) {
       throw new Error(`Template var missing: ${key}`);
     }
 
-    // Replace the first found template and then look for the next
-    currentStr = currentStr.replace(fullMatch, objectPath.get(context, key));
+    // Replace the match
+    const replacement = objectPath.get(context, key);
+    str = str.substring(0, match.index) + replacement + str.substring(match.index + fullMatch.length);
   }
 
-  return currentStr;
+  return str;
 }
+
 export const parse = (obj: any, dir: string, context: any): any => {
   let copy;
 
