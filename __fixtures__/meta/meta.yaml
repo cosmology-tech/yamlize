@@ -1,0 +1,15 @@
+name: Build and Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-artifacts: 
+    import-yaml: 'build-artifacts.yaml'
+
+  build-wasm:
+    import-yaml: 'build-wasm.yaml'
+
+  prepare-and-publish:
+    needs: build-wasm
+    import-yaml: 'prepare-and-publish.yaml'
