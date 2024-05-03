@@ -5,6 +5,8 @@
     Generate YAML
 </p>
 
+`yamlize` is a powerful tool designed to simplify the creation of YAML files by allowing dynamic generation based on predefined templates and contextual data. This tool is especially useful in environments where configurations need to be adjusted frequently, such as in CI/CD workflows. It provides flexibility in integrating changes seamlessly and ensures configurations are up-to-date with minimal manual intervention.
+
 ## install
 
 ```sh
@@ -33,7 +35,11 @@ npm install -g @yamlize/cli
 
 ## Usage
 
-Here is `meta.yaml`
+`yamlize` helps you dynamically generate YAML configurations using predefined templates and context. Here’s how to use it with example YAML templates and the corresponding JavaScript function call:
+
+### Example 
+
+**meta.yaml** - This is your main workflow template.
 
 ```yaml
 name: Build
@@ -44,15 +50,13 @@ on:
 jobs:
   build-artifacts: 
   - import-yaml: node/setup.yaml
-
   - import-yaml: git/configure.yaml
-
   - name: Install and Build 🚀
     run: |
       yarn
 ```
 
-Here is `node/setup.yaml`
+**node/setup.yaml** - Sets up your Node.js environment.
 
 ```yaml
 name: Setup Node.js 🌐
@@ -62,7 +66,7 @@ with:
   cache: 'yarn'
 ```
 
-Here is `git/configure.yaml`
+**git/configure.yaml** - Configures Git with user information.
 
 ```yaml
 name: Configure Git 🛠
@@ -71,20 +75,24 @@ run: |
   git config user.email "${{yamlize.git.USER_EMAIL}}"
 ```
 
-Now call `yamlize`, and provide a context
+### Invoking Yamlize
+
+Provide the `meta.yaml` template and your specific context to generate the complete YAML configuration.
 
 ```js
-    yamlize(metaYaml, outFile, {
-        git: {
-            USER_NAME: 'Cosmology',
-            USER_EMAIL: 'developers@cosmology.zone',
-        },
-        EMSCRIPTEN_VERSION: '3.1.59',
-        NODE_VERSION: '20.x' 
-    });
+yamlize(metaYaml, outFile, {
+    git: {
+        USER_NAME: 'Cosmology',
+        USER_EMAIL: 'developers@cosmology.zone',
+    },
+    EMSCRIPTEN_VERSION: '3.1.59',
+    NODE_VERSION: '20.x' 
+});
 ```
 
-Output:
+### Output Example
+
+Here's the generated YAML configuration reflecting the provided context.
 
 ```yaml
 name: Build
