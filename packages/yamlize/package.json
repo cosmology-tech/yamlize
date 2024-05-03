@@ -12,9 +12,6 @@
     "access": "public",
     "directory": "dist"
   },
-  "bin": {
-    "yamlize": "index.js"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/cosmology-tech/yamlize"
