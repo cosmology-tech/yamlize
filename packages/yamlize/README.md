@@ -1,9 +1,16 @@
 # yamlize
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/545047/188804067-28e67e5e-0214-4449-ab04-2e0c564a6885.svg" width="80"><br />
-    Generate YAML
+  <img src="https://user-images.githubusercontent.com/545047/190171475-b416f99e-2831-4786-9ba3-a7ff4d95b0d3.svg" width="80"><br />
+   <!-- <a href="https://www.npmjs.com/package/yamlize"><img height="20" src="https://img.shields.io/npm/dt/yamlize"></a> -->
+   <!-- <a href="https://www.npmjs.com/package/yamlize"><img height="20" src="https://img.shields.io/npm/dw/yamlize"/></a> -->
+   <a href="https://github.com/cosmology-tech/yamlize/blob/main/LICENSE-MIT"><img height="20" src="https://img.shields.io/badge/license-MIT-blue.svg"/></a>
+   <a href="https://www.npmjs.com/package/yamlize"><img height="20" src="https://img.shields.io/github/package-json/v/cosmology-tech/yamlize?filename=packages%2Fyamlize%2Fpackage.json"/></a>
+   <a href="https://github.com/cosmology-tech/yamlize/actions/workflows/run-tests.yml">
+    <img height="20" src="https://github.com/cosmology-tech/yamlize/actions/workflows/run-tests.yml/badge.svg" />
+   </a>
 </p>
+
 
 `yamlize` is a powerful tool designed to simplify the creation of YAML files by allowing dynamic generation based on predefined templates and contextual data. This tool is especially useful in environments where configurations need to be adjusted frequently, such as in CI/CD workflows. It provides flexibility in integrating changes seamlessly and ensures configurations are up-to-date with minimal manual intervention.
 
