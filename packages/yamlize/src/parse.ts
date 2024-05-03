@@ -63,12 +63,14 @@ export const parse = (obj: any, dir: string, context: any): any => {
   // Handle Object
   if (obj instanceof Object || typeof obj === 'object') {
     copy = {};
+    let importedYaml = {};
     if (obj['import-yaml']) {
-      const yamlFile = join(dir, obj['import-yaml']);
+      const importYaml = obj['import-yaml'];
+      delete obj['import-yaml'];
+      const yamlFile = join(dir, importYaml);
       const content = readFileSync(yamlFile, 'utf8');
       const parsed = yaml.load(content);
-      copy = parse(parsed, dirname(yamlFile), context);
-      return copy;
+      importedYaml = parse(parsed, dirname(yamlFile), context);
     }
     for (let attr in obj) {
       switch (attr) {
@@ -77,7 +79,10 @@ export const parse = (obj: any, dir: string, context: any): any => {
           copy[attr] = parse(obj[attr], dir, context);
       }
     }
-    return copy;
+    return {
+      ...copy,
+      ...importedYaml
+    }
   }
 
   throw new Error("Unable to copy obj! Its type isn't supported.");

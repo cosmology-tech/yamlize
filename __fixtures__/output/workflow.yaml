@@ -79,6 +79,7 @@ jobs:
           name: wasm-artifacts
           path: wasm
   prepare-and-publish:
+    needs: build-wasm
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository 📥
