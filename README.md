@@ -2,7 +2,7 @@
 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/545047/188804067-28e67e5e-0214-4449-ab04-2e0c564a6885.svg" width="80"><br />
-    __MODULEDESC__
+    Generate YAML
 </p>
 
 ## install
@@ -10,18 +10,106 @@
 ```sh
 npm install yamlize
 ```
+
+For CI/CD and easier usage, use our CLI:
+
+```sh
+npm install @yamlize/cli
+```
+
+or for your own use:
+
+```sh
+npm install -g @yamlize/cli
+```
+
 ## Table of contents
 
 - [yamlize](#yamlize)
   - [Install](#install)
-  - [Table of contents](#table-of-contents)
+  - [Usage](#usage)
 - [Developing](#developing)
 - [Credits](#credits)
 
+## Usage
+
+Here is `meta.yaml`
+
+```yaml
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-artifacts: 
+  - import-yaml: node/setup.yaml
+
+  - import-yaml: git/configure.yaml
+
+  - name: Install and Build 🚀
+    run: |
+      yarn
+```
+
+Here is `node/setup.yaml`
+
+```yaml
+name: Setup Node.js 🌐
+uses: actions/setup-node@v4
+with:
+  node-version: ${{yamlize.NODE_VERSION}}
+  cache: 'yarn'
+```
+
+Here is `git/configure.yaml`
+
+```yaml
+name: Configure Git 🛠
+run: |
+  git config user.name "${{yamlize.git.USER_NAME}}"
+  git config user.email "${{yamlize.git.USER_EMAIL}}"
+```
+
+Now call `yamlize`, and provide a context
+
+```js
+    yamlize(metaYaml, outFile, {
+        git: {
+            USER_NAME: 'Cosmology',
+            USER_EMAIL: 'developers@cosmology.zone',
+        },
+        EMSCRIPTEN_VERSION: '3.1.59',
+        NODE_VERSION: '20.x' 
+    });
+```
+
+Output:
+
+```yaml
+name: Build
+on:
+  workflow_dispatch: null
+jobs:
+  build-artifacts:
+    - name: Setup Node.js 🌐
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: yarn
+    - name: Configure Git 🛠
+      run: |
+        git config user.name "Cosmology"
+        git config user.email "developers@cosmology.zone"
+    - name: Install and Build 🚀
+      run: |
+        yarn
+```
+
 ## Developing
 
-
 When first cloning the repo:
+
 ```
 yarn
 yarn build

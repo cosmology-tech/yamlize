@@ -1,6 +1,6 @@
 {
   "name": "yamlize",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "description": "Generate YAML",
   "main": "index.js",
@@ -11,6 +11,9 @@
   "publishConfig": {
     "access": "public",
     "directory": "dist"
+  },
+  "bin": {
+    "yamlize": "index.js"
   },
   "repository": {
     "type": "git",
