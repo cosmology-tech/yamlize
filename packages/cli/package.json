@@ -1,0 +1,42 @@
+{
+  "name": "@yamlize/cli",
+  "version": "0.0.1",
+  "author": "Dan Lynch <pyramation@gmail.com>",
+  "description": "yamlize CLI",
+  "main": "index.js",
+  "module": "esm/index.js",
+  "types": "index.d.ts",
+  "homepage": "https://github.com/cosmology-tech/yamlize",
+  "license": "SEE LICENSE IN LICENSE",
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cosmology-tech/yamlize"
+  },
+  "bugs": {
+    "url": "https://github.com/cosmology-tech/yamlize/issues"
+  },
+  "scripts": {
+    "copy": "copyfiles -f ../../LICENSE README.md package.json dist",
+    "clean": "del dist/**",
+    "prepare": "npm run build",
+    "dev": "ts-node src/index",
+    "build": "npm run clean; tsc; tsc -p tsconfig.esm.json; npm run copy",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [],
+  "dependencies": {
+    "chalk": "4.1.0",
+    "inquirerer": "^1.9.0",
+    "js-yaml": "^4.1.0",
+    "minimist": "1.2.8",
+    "yamlize": "^0.0.2"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9"
+  }
+}
