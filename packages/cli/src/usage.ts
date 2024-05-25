@@ -1,5 +1,5 @@
 export const help = (): void => {
-    console.log(`
+  console.log(`
 Usage:
 
 yamlize --config <path to config file>
@@ -13,5 +13,5 @@ Options:
 --config                   Path to the config file (optional).
 --inFile                   Path to the meta yaml file where the configuration is defined.
 --outFile                  Path where the generated yaml file will be saved.
-`)
-}
+`);
+};

@@ -1,15 +1,15 @@
+import { findPackageJson } from '@interweb-utils/find-pkg';
 import { readFileSync } from 'fs';
-import { CLIOptions, Inquirerer } from 'inquirerer'
+import { CLIOptions, Inquirerer } from 'inquirerer';
 import yaml from 'js-yaml';
 import { ParsedArgs } from 'minimist';
 import { yamlize } from 'yamlize';
 
-import { readAndParsePackageJson } from './package';
 import { help } from './usage';
 
 export const commands = async (argv: Partial<ParsedArgs>, prompter: Inquirerer, _options: CLIOptions) => {
   if (argv.version || argv.v) {
-    console.log(readAndParsePackageJson().version);
+    console.log(findPackageJson().version);
     process.exit(0);
   }
 
@@ -46,8 +46,8 @@ export const commands = async (argv: Partial<ParsedArgs>, prompter: Inquirerer, 
   let context: any = {};
 
   if (argv.config) {
-      const ctxContent = readFileSync(argv.config, 'utf-8');
-      context = yaml.load(ctxContent) as any;
+    const ctxContent = readFileSync(argv.config, 'utf-8');
+    context = yaml.load(ctxContent) as any;
   }
 
   yamlize(argv.inFile, argv.outFile, context);

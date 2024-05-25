@@ -1,7 +1,7 @@
-import { readFileSync } from "fs";
+import { readFileSync } from 'fs';
 import yaml from 'js-yaml';
 import objectPath from 'nested-obj';
-import { dirname, join } from "path";
+import { dirname, join } from 'path';
 
 function replaceTemplates(str: string, context: any) {
   const templateRegex = /\${{\s*([^.\s]+)\.([^}\s]+)\s*}}/g;
@@ -74,15 +74,15 @@ export const parse = (obj: any, dir: string, context: any): any => {
     }
     for (let attr in obj) {
       switch (attr) {
-        default:
-          // @ts-ignore
-          copy[attr] = parse(obj[attr], dir, context);
+      default:
+        // @ts-ignore
+        copy[attr] = parse(obj[attr], dir, context);
       }
     }
     return {
       ...copy,
       ...importedYaml
-    }
+    };
   }
 
   throw new Error("Unable to copy obj! Its type isn't supported.");

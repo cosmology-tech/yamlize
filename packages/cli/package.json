@@ -24,15 +24,17 @@
   },
   "scripts": {
     "copy": "copyfiles -f ../../LICENSE README.md package.json dist",
-    "clean": "del dist/**",
+    "clean": "rimraf dist/**",
     "prepare": "npm run build",
     "dev": "ts-node src/index",
     "build": "npm run clean; tsc; tsc -p tsconfig.esm.json; npm run copy",
+    "lint": "eslint . --fix",
     "test": "jest",
     "test:watch": "jest --watch"
   },
   "keywords": [],
   "dependencies": {
+    "@interweb-utils/find-pkg": "^0.3.0",
     "chalk": "4.1.0",
     "inquirerer": "^1.9.0",
     "js-yaml": "^4.1.0",
